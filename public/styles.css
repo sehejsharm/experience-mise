@@ -445,3 +445,7 @@ section { padding: 120px 16px; max-width: 1200px; margin: 0 auto; position: rela
 .phone.zoomed .cam { transform: scale(1.15) !important; }
 .shot img { width: 100%; height: auto; display: block; }
 .journey-stage.is-loading .frame-wrap::after { content: ""; position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; margin: -14px; border-radius: 50%; border: 2px solid rgba(255,255,255,.15); border-top-color: var(--mint); animation: spin .8s linear infinite; }
+.adv-grid { grid-template-columns: repeat(3, minmax(0, 320px)); }
+.adv-grid .adv:nth-child(3) { transition-delay: .24s; }
+@media (max-width: 1000px) { .adv-grid { grid-template-columns: repeat(2, minmax(0, 320px)); } }
+@media (max-width: 700px) { .adv-grid { grid-template-columns: 1fr; } }
