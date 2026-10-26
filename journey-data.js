@@ -5,7 +5,7 @@
  * hotspot: position as % of image width / height.
  * NOTE: filenames are provisional until Sehej confirms the final names.
  */
-window.MISE_CONTACT_HREF = "#"; // TODO: set to mailto: or a contact form URL
+window.MISE_CONTACT_HREF = "mailto:hello@misehotel.com";
 
 window.MISE_JOURNEY = [
   { src: "public/screens/author_standards_queue.jpg", role: "Author", viewport: "desktop",
