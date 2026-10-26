@@ -158,10 +158,10 @@
 
       <div class="journey-controls">
         <button class="btn btn-round" id="jPrev" aria-label="Previous step">←</button>
-        <div class="dots" id="jDots" role="tablist" aria-label="Choose step"></div>
+        <button class="btn btn-round play" id="jPlay" aria-label="Pause tour" aria-pressed="true"><span class="i-pause"></span></button>
         <button class="btn btn-round" id="jNext" aria-label="Next step">→</button>
       </div>
-      <p class="hint">Tap the glowing dot · ← → keys · swipe</p>
+      <ol class="timeline" id="jDots" aria-label="Tour steps"></ol>
     </div>
   </section>
 

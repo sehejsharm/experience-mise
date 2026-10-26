@@ -84,31 +84,49 @@
       return frame;
     }
 
+    // Camera: the screenshot zooms toward the action; the hotspot point stays fixed.
+    var cam = document.createElement("div");
+    cam.className = "cam";
     var img = new Image();
     img.src = item.src;
     img.alt = item.role + " view: " + item.caption;
     img.decoding = "async";
-    shot.appendChild(img);
+    cam.appendChild(img);
+    shot.appendChild(cam);
 
-    var hs = null, spot = null;
     if (item.hotspot) {
-      var x = item.hotspot.x + "%", y = item.hotspot.y + "%";
-      img.style.setProperty("--ox", x);
-      img.style.setProperty("--oy", y);
-      spot = document.createElement("div");
-      spot.className = "spot";
-      spot.style.setProperty("--sx", x);
-      spot.style.setProperty("--sy", y);
-      shot.appendChild(spot);
-      hs = document.createElement("button");
+      var x = item.hotspot.x, y = item.hotspot.y;
+      cam.style.transformOrigin = x + "% " + y + "%";
+
+      var ring = document.createElement("div");
+      ring.className = "focus-ring";
+      ring.style.left = x + "%"; ring.style.top = y + "%";
+      shot.appendChild(ring);
+
+      var hs = document.createElement("button");
       hs.className = "hotspot";
       hs.type = "button";
       hs.innerHTML = "<span></span>";
-      hs.style.left = x;
-      hs.style.top = y;
-      hs.setAttribute("aria-label", i < data.length - 1 ? "Next step" : "Back to the start");
-      hs.addEventListener("click", activate);
+      hs.style.left = x + "%"; hs.style.top = y + "%";
+      hs.setAttribute("aria-label", (item.callout || "Next step") + ". " + (i < data.length - 1 ? "Go to next step" : "Back to the start"));
+      hs.addEventListener("click", function () { userNav(); activate(); });
       shot.appendChild(hs);
+
+      if (item.callout) {
+        var tip = document.createElement("div");
+        tip.className = "callout " + (x > 55 ? "to-left" : "to-right") + " " + (y > 45 ? "up" : "down");
+        tip.style.left = x + "%"; tip.style.top = y + "%";
+        tip.setAttribute("aria-hidden", "true");
+        tip.innerHTML = "<i></i><span></span><b>→</b>";
+        tip.querySelector("span").textContent = item.callout;
+        shot.appendChild(tip);
+      }
+      if (!reduce) {
+        var t = setTimeout(function () { frame.classList.add("zoomed"); }, 1100);
+        frame._timer = t;
+      } else {
+        frame.classList.add("zoomed");
+      }
     }
     img.onerror = function () {
       shot.innerHTML = "";
@@ -123,6 +141,29 @@
     el.classList.add("swap");
   }
 
+  // Autoplay, story-style
+  var DURATION = 8000, playing = !reduce, inView = false, elapsed = 0, last = null;
+  var playBtn = $("jPlay");
+  function setPlaying(v) {
+    playing = v;
+    playBtn.setAttribute("aria-pressed", v ? "true" : "false");
+    playBtn.setAttribute("aria-label", v ? "Pause tour" : "Play tour");
+    playBtn.innerHTML = v ? '<span class="i-pause"></span>' : '<span class="i-play"></span>';
+    stage.classList.toggle("is-playing", v);
+  }
+  function userNav() { setPlaying(false); }
+  function tick(t) {
+    if (last === null) last = t;
+    var dt = t - last; last = t;
+    if (playing && inView && !document.hidden) {
+      elapsed += dt;
+      var fill = dotsEl.children[index] && dotsEl.children[index].querySelector(".seg i");
+      if (fill) fill.style.transform = "scaleX(" + Math.min(elapsed / DURATION, 1) + ")";
+      if (elapsed >= DURATION) activate();
+    }
+    requestAnimationFrame(tick);
+  }
+
   function go(i, dir) {
     if (i < 0 || i >= data.length || i === index) return;
     var item = data[i];
@@ -131,8 +172,9 @@
     frame.classList.add("enter-" + dir);
     if (current) {
       var old = current;
+      clearTimeout(old._timer);
       old.classList.add("leave");
-      setTimeout(function () { old.remove(); }, 650);
+      setTimeout(function () { old.remove(); }, 700);
     }
     wrap.appendChild(frame);
     requestAnimationFrame(function () {
@@ -140,6 +182,7 @@
     });
     current = frame;
     index = i;
+    elapsed = 0;
 
     roleEl.textContent = item.role;
     roleEl.setAttribute("data-role", item.role);
@@ -154,7 +197,7 @@
     (item.points || []).forEach(function (p, k) {
       var li = document.createElement("li");
       li.style.animationDelay = (0.25 + k * 0.12) + "s";
-      li.innerHTML = "<i>" + (k + 1) + "</i>";
+      li.innerHTML = '<i aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i>';
       li.appendChild(document.createTextNode(p));
       tilesEl.appendChild(li);
     });
@@ -166,10 +209,11 @@
     });
 
     prev.disabled = i === 0;
-    next.disabled = i === data.length - 1;
-    Array.prototype.forEach.call(dotsEl.children, function (d, k) {
-      d.setAttribute("aria-selected", k === i ? "true" : "false");
-      d.tabIndex = k === i ? 0 : -1;
+    Array.prototype.forEach.call(dotsEl.children, function (li, k) {
+      var btn = li.querySelector("button");
+      li.className = k === i ? "now" : (k < i ? "past" : "");
+      btn.setAttribute("aria-current", k === i ? "step" : "false");
+      li.querySelector(".seg i").style.transform = "scaleX(" + (k < i ? 1 : 0) + ")";
     });
   }
 
@@ -179,23 +223,27 @@
   }
 
   data.forEach(function (item, i) {
-    var d = document.createElement("button");
+    var li = document.createElement("li");
     var pending = item.kind !== "scene" && !item.src;
-    d.className = "dot" + (pending ? " pending" : "");
-    d.type = "button";
-    d.setAttribute("role", "tab");
-    d.setAttribute("aria-label", "Step " + (i + 1) + ", " + item.role + (pending ? " (coming soon)" : ""));
-    d.addEventListener("click", function () { go(i); });
-    dotsEl.appendChild(d);
+    if (pending) li.dataset.pending = "1";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Step " + (i + 1) + ": " + (item.short || item.title) + ", " + item.role + (pending ? " (coming soon)" : ""));
+    btn.innerHTML = '<span class="seg"><i></i></span><span class="lbl"><em>' + String(i + 1).padStart(2, "0") + "</em></span>";
+    btn.querySelector(".lbl").appendChild(document.createTextNode(item.short || ""));
+    btn.addEventListener("click", function () { userNav(); go(i); });
+    li.appendChild(btn);
+    dotsEl.appendChild(li);
   });
-  prev.addEventListener("click", function () { go(index - 1, "left"); });
-  next.addEventListener("click", function () { go(index + 1, "right"); });
+  prev.addEventListener("click", function () { userNav(); go(index - 1, "left"); });
+  next.addEventListener("click", function () { userNav(); activate(); });
+  playBtn.addEventListener("click", function () { setPlaying(!playing); });
 
   stage.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight") { e.preventDefault(); go(index + 1, "right"); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); go(index - 1, "left"); }
+    if (e.key === "ArrowRight") { e.preventDefault(); userNav(); go(index + 1, "right"); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); userNav(); go(index - 1, "left"); }
     else if ((e.key === "Enter" || e.key === " ") && (e.target === stage || e.target.classList.contains("hotspot"))) {
-      e.preventDefault(); activate();
+      e.preventDefault(); userNav(); activate();
     }
   });
 
@@ -204,11 +252,17 @@
   wrap.addEventListener("touchend", function (e) {
     if (sx === null) return;
     var dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 50) { userNav(); go(index + (dx < 0 ? 1 : -1)); }
     sx = null;
   });
 
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) { inView = en[0].isIntersecting; }, { threshold: 0.5 }).observe(stage);
+  } else { inView = true; }
+
+  setPlaying(playing);
   if (data.length) go(0, "right");
+  requestAnimationFrame(tick);
 
   // Proof images with graceful fallback
   document.querySelectorAll(".img-slot").forEach(function (slot) {
