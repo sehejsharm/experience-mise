@@ -90,7 +90,7 @@
     var img = new Image();
     img.src = item.src;
     img.alt = item.role + " view: " + item.caption;
-    img.decoding = "async";
+    load(item.src).then(function (im) { if (im) { img.width = im.naturalWidth; img.height = im.naturalHeight; } });
     cam.appendChild(img);
     shot.appendChild(cam);
 
@@ -164,8 +164,36 @@
     requestAnimationFrame(tick);
   }
 
+  // Preload and decode every screenshot up front, so a slide never shows an empty frame.
+  var cache = {};
+  function load(src) {
+    if (!cache[src]) {
+      cache[src] = new Promise(function (resolve) {
+        var im = new Image();
+        im.decoding = "async";
+        im.onload = function () { (im.decode ? im.decode() : Promise.resolve()).then(function () { resolve(im); }, function () { resolve(im); }); };
+        im.onerror = function () { resolve(null); };
+        im.src = src;
+      });
+    }
+    return cache[src];
+  }
+  data.forEach(function (it) { if (it.src) load(it.src); });
+
+  var pending = 0;
   function go(i, dir) {
     if (i < 0 || i >= data.length || i === index) return;
+    var item = data[i], token = ++pending;
+    if (!item.src) return render(i, dir);
+    stage.classList.add("is-loading");
+    load(item.src).then(function () {
+      if (token !== pending) return;
+      stage.classList.remove("is-loading");
+      render(i, dir);
+    });
+  }
+
+  function render(i, dir) {
     var item = data[i];
     dir = dir || (i > index ? "right" : "left");
     var frame = buildFrame(item, i);
