@@ -27,15 +27,15 @@ window.MISE_JOURNEY = [
     caption: "Bring in your standard. Mise turns it into a timed sequence.", hotspot: { x: 63, y: 83 },
     points: ["Numbered steps with reference photos", "What must be true at the end", "Supervisor release check"] },
 
-  { kind: "screen", src: null, short: "Arrives", role: "Staff", viewport: "mobile",
+  { kind: "screen", src: "screens/staff_task_arrives.jpg", short: "Arrives", callout: "Open the task", role: "Staff", viewport: "mobile",
     title: "The task arrives on the floor.",
-    caption: "Coming soon: the timed task arriving on a staff phone.",
+    caption: "The task lands on the right phone, timed to the shift.", hotspot: { x: 28, y: 75 },
     points: ["On the phone already in their pocket", "Timed to the shift", "In every department"] },
 
-  { kind: "screen", src: null, short: "Proof", role: "Staff", viewport: "mobile",
-    title: "Done step by step, with proof.",
-    caption: "Coming soon: working the task step by step, with photo proof.",
-    points: ["One step at a time", "Photo evidence as the work happens", "Supervisor sign-off"] },
+  { kind: "screen", src: "screens/staff_task_steps.jpg", short: "Steps", callout: "Start the task", role: "Staff", viewport: "mobile",
+    title: "Done step by step, the way you do it.",
+    caption: "Every step in order, with a target time, exactly as your hotel wrote it.", hotspot: { x: 50, y: 52 },
+    points: ["One step at a time", "Coaching notes on every step", "Independent check before release"] },
 
   { kind: "screen", src: "screens/manager_assign_job.jpg", short: "Assign", callout: "Send to the floor", role: "Manager", viewport: "desktop",
     title: "Send it to the floor.",

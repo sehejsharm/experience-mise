@@ -434,3 +434,12 @@ section { padding: 120px 16px; max-width: 1200px; margin: 0 auto; position: rela
   .tiles li svg { stroke-dashoffset: 0; }
   .callout { opacity: 1; }
 }
+
+/* Phone shots keep their own proportions so hotspots stay accurate */
+.phone .screen { aspect-ratio: auto; }
+.phone .shot, .phone .cam, .phone .cam img { height: auto; }
+.phone .shot { padding-top: 26px; background: #0C2329; }
+.phone { width: min(300px, 72vw); }
+.phone .callout { translate: -50% 0 !important; margin-top: 34px !important; }
+.phone .callout::after { display: none; }
+.phone.zoomed .cam { transform: scale(1.15) !important; }
