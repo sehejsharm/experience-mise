@@ -7,147 +7,255 @@
 <meta name="description" content="Mise is the service execution platform (SEP) for hotels.">
 <meta name="theme-color" content="#0C2329">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="top">
+<div class="sky" aria-hidden="true">
+  <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="cloud c4"></span>
+  <div class="grid-lines"></div>
+</div>
+<div class="progress-bar" id="scrollBar" aria-hidden="true"></div>
+
+<header class="top" id="top">
   <a href="#hero" class="brand" aria-label="Mise home">
-    <img src="logo.svg" alt="" width="36" height="36"><span>Mise</span>
+    <img src="logo.svg" alt="" width="34" height="34"><span>Mise</span>
   </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#problems">Why</a><a href="#advisors">Advisors</a><a href="#journey">Experience</a><a href="#evidence">Evidence</a>
+  </nav>
   <a class="btn btn-ghost" href="mailto:hello@misehotel.com">Talk to us</a>
 </header>
 
 <main id="main">
 
-  <!-- 1. Hero -->
+  <!-- Hero -->
   <section id="hero" class="hero">
-    <img class="hero-logo" src="logo.svg" alt="" width="88" height="88">
-    <h1>Mise is care.</h1>
-    <p class="lede">Mise is the service execution platform (SEP) for hotels. It does not write your standards: it implements the standards your hotel already has, running them as timed tasks on staff phones in every department, capturing photo and supervisor evidence as the work happens, and building an audit-ready service record. Not an LMS. No PMS integration required.</p>
-    <ul class="depts" aria-label="Departments">
-      <li>Front office</li><li>Housekeeping</li><li>F&amp;B</li><li>Kitchen</li><li>Engineering</li><li>Security</li><li>Spa</li>
-    </ul>
-    <a class="scroll-cue" href="#problems">See why <span aria-hidden="true">↓</span></a>
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="live-dot"></span> Service execution platform for hotels</p>
+      <h1 class="split">Mise is <em>care.</em></h1>
+      <p class="lede">Mise is the service execution platform (SEP) for hotels. It does not write your standards: it implements the standards your hotel already has, running them as timed tasks on staff phones in every department, capturing photo and supervisor evidence as the work happens, and building an audit-ready service record. Not an LMS. No PMS integration required.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#journey">See it run <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="mailto:hello@misehotel.com">Talk to us</a>
+      </div>
+    </div>
+
+    <div class="orbit" aria-hidden="true">
+      <div class="orbit-ring r1"></div><div class="orbit-ring r2"></div><div class="orbit-ring r3"></div>
+      <div class="orbit-core"><img src="logo.svg" alt="" width="84" height="84"></div>
+      <div class="task t1"><i class="ic hk"></i><div><b>Housekeeping</b><span>Evening turndown · 18:00</span></div><em class="ok">✓</em></div>
+      <div class="task t2"><i class="ic fo"></i><div><b>Front office</b><span>VIP arrival check</span></div><em class="cam">◉</em></div>
+      <div class="task t3"><i class="ic kt"></i><div><b>Kitchen</b><span>Line check · 06:30</span></div><em class="ok">✓</em></div>
+      <div class="task t4"><i class="ic en"></i><div><b>Engineering</b><span>Pool readings</span></div><em class="run"></em></div>
+      <div class="task t5"><i class="ic sp"></i><div><b>Spa</b><span>Treatment room reset</span></div><em class="ok">✓</em></div>
+      <div class="task t6"><i class="ic se"></i><div><b>Security</b><span>Night round · Floor 4</span></div><em class="run"></em></div>
+    </div>
   </section>
 
-  <!-- 2. Problems -->
+  <div class="marquee" aria-label="Departments">
+    <div class="marquee-track">
+      <span>Front office</span><span>Housekeeping</span><span>F&amp;B</span><span>Kitchen</span><span>Engineering</span><span>Security</span><span>Spa</span>
+      <span aria-hidden="true">Front office</span><span aria-hidden="true">Housekeeping</span><span aria-hidden="true">F&amp;B</span><span aria-hidden="true">Kitchen</span><span aria-hidden="true">Engineering</span><span aria-hidden="true">Security</span><span aria-hidden="true">Spa</span>
+    </div>
+  </div>
+
+  <!-- Problems -->
   <section id="problems" class="problems" aria-label="The problem">
     <article class="problem reveal">
-      <span class="num">01</span>
-      <h2>Your hotel's entire standard is one resignation letter away from deletion.</h2>
-      <p>The standard lives in one supervisor's head, a binder, or a WhatsApp group. When they leave, it leaves.</p>
+      <div class="problem-art" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="art-binder">
+          <rect class="page p1" x="50" y="40" width="100" height="130" rx="8"/>
+          <rect class="page p2" x="56" y="34" width="100" height="130" rx="8"/>
+          <rect class="page p3" x="62" y="28" width="100" height="130" rx="8"/>
+          <g class="lines"><line x1="76" y1="56" x2="146" y2="56"/><line x1="76" y1="72" x2="140" y2="72"/><line x1="76" y1="88" x2="146" y2="88"/><line x1="76" y1="104" x2="128" y2="104"/></g>
+          <path class="exit" d="M150 150 l24 0 m-8 -8 l8 8 -8 8"/>
+        </svg>
+      </div>
+      <div>
+        <span class="num">01</span>
+        <h2>Your hotel's entire standard is one resignation letter away from deletion.</h2>
+        <p>The standard lives in one supervisor's head, a binder, or a WhatsApp group. When they leave, it leaves.</p>
+      </div>
     </article>
     <article class="problem reveal">
-      <span class="num">02</span>
-      <h2>Someone undertrained is standing in front of a paying guest right now. Nobody in this building knows who.</h2>
-      <p>At the front desk, on the floor, in the kitchen, at the spa: readiness is a guess until someone checks.</p>
+      <div class="problem-art" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="art-radar">
+          <circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="54"/><circle cx="100" cy="100" r="28"/>
+          <path class="sweep" d="M100 100 L100 20 A80 80 0 0 1 169 60 Z"/>
+          <circle class="blip b1" cx="140" cy="70" r="5"/><circle class="blip b2" cx="64" cy="132" r="5"/><circle class="blip b3 risk" cx="128" cy="142" r="6"/>
+        </svg>
+      </div>
+      <div>
+        <span class="num">02</span>
+        <h2>Someone undertrained is standing in front of a paying guest right now. Nobody in this building knows who.</h2>
+        <p>At the front desk, on the floor, in the kitchen, at the spa: readiness is a guess until someone checks.</p>
+      </div>
     </article>
     <article class="problem reveal">
-      <span class="num">03</span>
-      <h2>What you can't prove to an inspector is what you can't charge a guest.</h2>
-      <p>No evidence, no record. No record, no case for the rate.</p>
+      <div class="problem-art" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="art-clip">
+          <rect x="48" y="30" width="104" height="146" rx="10"/>
+          <rect class="clip" x="78" y="22" width="44" height="16" rx="5"/>
+          <g class="rows"><path d="M66 70h12M88 70h48"/><path d="M66 98h12M88 98h40"/><path d="M66 126h12M88 126h44"/></g>
+          <text x="100" y="164" class="q">?</text>
+        </svg>
+      </div>
+      <div>
+        <span class="num">03</span>
+        <h2>What you can't prove to an inspector is what you can't charge a guest.</h2>
+        <p>No evidence, no record. No record, no case for the rate.</p>
+      </div>
     </article>
   </section>
 
-  <!-- 3. Journey -->
+  <!-- Advisors -->
+  <section id="advisors" class="advisors" aria-labelledby="adv-title">
+    <p class="eyebrow center">Advisory board</p>
+    <h2 id="adv-title" class="section-title">The people who keep us honest.</h2>
+    <div class="adv-grid">
+      <article class="adv reveal">
+        <div class="adv-photo"><img src="advisors/parul-sharma.jpeg" alt="Portrait of Parul Sharma" loading="lazy"></div>
+        <div class="adv-body"><h3>Parul Sharma</h3><p>Hospitality Training Consultant</p></div>
+      </article>
+      <article class="adv reveal">
+        <div class="adv-photo"><img src="advisors/renu-mehra.jpeg" alt="Portrait of Renu Mehra" loading="lazy"></div>
+        <div class="adv-body"><h3>Renu Mehra</h3><p>Luxury &amp; Celebrity Image Consultant &amp; Corporate Trainer</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Experience -->
   <section id="journey" class="journey" aria-labelledby="journey-title">
-    <h2 id="journey-title" class="section-title">How it runs</h2>
-    <p class="section-sub">Tap the glowing dot, or use ← → keys.</p>
+    <p class="eyebrow center">The experience</p>
+    <h2 id="journey-title" class="section-title">From a standard on paper to proof on the floor.</h2>
+    <div class="role-rail" id="roleRail" aria-hidden="true">
+      <span data-role="Author">Author</span><i></i><span data-role="Staff">Staff</span><i></i><span data-role="Manager">Manager</span>
+    </div>
 
-    <div class="journey-stage" id="journeyStage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Product journey">
-      <div class="journey-meta">
+    <div class="journey-stage" id="journeyStage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Product experience. Use left and right arrow keys.">
+      <div class="stage-visual">
+        <div class="frame-wrap" id="frameWrap"></div>
+      </div>
+
+      <aside class="stage-side" aria-live="polite">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-label"><b id="jNum">1</b><span id="jTotal">/ 9</span></div>
+        </div>
         <span class="role" id="jRole"></span>
-        <span class="count" id="jCount" aria-live="polite"></span>
-      </div>
-      <div class="frame-wrap" id="frameWrap"></div>
-      <p class="caption" id="jCaption"></p>
+        <h3 class="side-title" id="jTitle"></h3>
+        <p class="side-cap" id="jCaption"></p>
+        <ul class="tiles" id="jTiles"></ul>
+      </aside>
+
       <div class="journey-controls">
-        <button class="btn btn-round" id="jPrev" aria-label="Previous screen">←</button>
-        <div class="dots" id="jDots" role="tablist" aria-label="Choose screen"></div>
-        <button class="btn btn-round" id="jNext" aria-label="Next screen">→</button>
+        <button class="btn btn-round" id="jPrev" aria-label="Previous step">←</button>
+        <div class="dots" id="jDots" role="tablist" aria-label="Choose step"></div>
+        <button class="btn btn-round" id="jNext" aria-label="Next step">→</button>
+      </div>
+      <p class="hint">Tap the glowing dot · ← → keys · swipe</p>
+    </div>
+  </section>
+
+  <!-- Evidence / case studies -->
+  <section id="evidence" class="evidence" aria-labelledby="ev-title">
+    <p class="eyebrow center">The evidence</p>
+    <h2 id="ev-title" class="section-title">Executed standards show up in the numbers.</h2>
+    <p class="section-sub">Independent, published examples from across the industry. None of these companies are Mise customers.</p>
+
+    <div class="cases">
+      <article class="case reveal">
+        <span class="case-tag">Brand standards · Luxury</span>
+        <h3>The Ritz-Carlton</h3>
+        <p class="case-line">Every employee carries the Gold Standards on a wallet card. The company is the only two-time winner of the U.S. Baldrige National Quality Award in the service category (1992, 1999).</p>
+        <div class="viz bars">
+          <div class="bar-row"><span>Industry</span><div class="bar"><i style="--w:80%"></i></div><b><span class="count" data-to="80">0</span>%</b></div>
+          <div class="bar-row hi"><span>Ritz-Carlton</span><div class="bar"><i style="--w:20%"></i></div><b><span class="count" data-to="20">0</span>%</b></div>
+          <p class="viz-cap">Employee turnover, as reported by the company</p>
+        </div>
+        <a class="src" href="https://www.nist.gov/blogs/blogrige/customer-really-always-right-hotel-company-invests-its-employees-first" target="_blank" rel="noopener">Source: NIST Baldrige</a>
+      </article>
+
+      <article class="case reveal">
+        <span class="case-tag">Execution platform · Aparthotels</span>
+        <h3>Staycity</h3>
+        <p class="case-line">Moved housekeeping from paper to a hotel operations platform (Optii) across its properties.</p>
+        <div class="viz stats">
+          <div class="stat"><b>+<span class="count" data-to="20">0</span>%</b><span>productivity</span></div>
+          <div class="stat"><b>−<span class="count" data-to="10">0</span>%</b><span>housekeeping turnover</span></div>
+          <div class="stat"><b>~<span class="count" data-to="2">0</span>h</b><span>rooms ready sooner</span></div>
+        </div>
+        <a class="src" href="https://hoteltechreport.com/success-stories/marketing/optii/staycity-aparthotels" target="_blank" rel="noopener">Source: Hotel Tech Report (verified case study)</a>
+      </article>
+
+      <article class="case reveal">
+        <span class="case-tag">Labor standards · Two-hotel test</span>
+        <h3>Hotel Effectiveness</h3>
+        <p class="case-line">Flexible minutes-per-room targets cut cleaning time with virtually no change in brand quality scores.</p>
+        <div class="viz drop">
+          <div class="drop-col"><i style="--h:100%"></i><b>28.2</b><span>before</span></div>
+          <div class="drop-col hi"><i style="--h:92.6%"></i><b>26.1</b><span>after</span></div>
+          <div class="drop-badge">−<span class="count" data-to="7.4" data-dec="1">0</span>%</div>
+        </div>
+        <a class="src" href="https://info.hoteleffectiveness.com/hubfs/Housekeeping_Case_Study-6.pdf" target="_blank" rel="noopener">Source: Hotel Effectiveness (vendor test)</a>
+      </article>
+    </div>
+
+    <div class="proof reveal">
+      <div class="proof-head">
+        <h3>Same city. Same $67/night. Half a star apart.</h3>
+        <p>Two real hotels, neither affiliated with Mise, shown to illustrate that service consistency moves review scores.</p>
+      </div>
+      <div class="compare">
+        <figure class="compare-card">
+          <div class="img-slot" data-src="screens/proofvisual_royal_orchid_tripadvisor.jpg" data-alt="Tripadvisor listing showing a 4.7 star rating"></div>
+          <figcaption><span class="score">4.7★</span><span>$67/night</span></figcaption>
+        </figure>
+        <div class="vs" aria-hidden="true">vs</div>
+        <figure class="compare-card">
+          <div class="img-slot" data-src="screens/proofvisual_diggi_palace_tripadvisor.jpg" data-alt="Tripadvisor listing showing a 4.2 star rating"></div>
+          <figcaption><span class="score dim">4.2★</span><span>$67/night</span></figcaption>
+        </figure>
+      </div>
+      <div class="cornell">
+        <div class="cornell-num">+<span class="count" data-to="11.2" data-dec="1">0</span>%</div>
+        <p>Cornell research (Chris K. Anderson) found that one extra point on a 5-point review scale lets a hotel raise rates by roughly 11.2% at the same occupancy.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. Proof -->
-  <section id="proof" class="proof" aria-labelledby="proof-title">
-    <h2 id="proof-title" class="section-title">Consistency shows up in the score.</h2>
-    <p class="section-sub">Two real hotels. Same city. Same price point ($67/night). Neither is affiliated with Mise.</p>
-    <div class="compare reveal">
-      <figure class="compare-card">
-        <div class="img-slot" data-src="screens/proofvisual_royal_orchid_tripadvisor.jpg" data-alt="Tripadvisor listing showing a 4.7 star rating"></div>
-        <figcaption><span class="score">4.7★</span><span>$67/night</span></figcaption>
-      </figure>
-      <div class="vs" aria-hidden="true">vs</div>
-      <figure class="compare-card">
-        <div class="img-slot" data-src="screens/proofvisual_diggi_palace_tripadvisor.jpg" data-alt="Tripadvisor listing showing a 4.2 star rating"></div>
-        <figcaption><span class="score dim">4.2★</span><span>$67/night</span></figcaption>
-      </figure>
-    </div>
-    <p class="proof-note">Cornell research (Chris K. Anderson) found that one extra point on a 5-point review scale lets a hotel raise rates by roughly 11.2% at the same occupancy.</p>
-  </section>
-
-  <!-- 5. People -->
-  <section id="people" class="people" aria-labelledby="people-title">
-    <h2 id="people-title" class="section-title">Who is behind Mise</h2>
-    <div class="cards founders">
-      <article class="person reveal">
-        <div class="avatar" aria-hidden="true">AE</div>
-        <h3>Ali Electricwala</h3><p class="title">Co-Founder &amp; COO</p>
-        <ul class="tags"><li>Pilot design &amp; rollout</li><li>Customer success</li><li>Commercial operations</li></ul>
-      </article>
-      <article class="person reveal">
-        <div class="avatar" aria-hidden="true">SS</div>
-        <h3>Sehej Sharma</h3><p class="title">Co-Founder &amp; CEO</p>
-        <ul class="tags"><li>Category &amp; positioning</li><li>Product thesis</li><li>Go-to-market</li></ul>
-      </article>
-      <article class="person reveal">
-        <div class="avatar" aria-hidden="true">AM</div>
-        <h3>Aditya Mishra</h3><p class="title">Co-Founder &amp; CTO</p>
-        <ul class="tags"><li>Subtraction-first design</li><li>Platform architecture</li><li>Google Cloud &amp; Firebase</li></ul>
-      </article>
-    </div>
-
-    <h3 class="sub-title">Advisory board</h3>
-    <div class="cards advisors">
-      <article class="person small reveal">
-        <div class="avatar" aria-hidden="true">PS</div>
-        <h3>Parul Sharma</h3><p class="title">Hospitality Training Consultant</p>
-      </article>
-      <article class="person small reveal">
-        <div class="avatar" aria-hidden="true">RM</div>
-        <h3>Renu Mehra</h3><p class="title">Luxury &amp; Celebrity Image Consultant &amp; Corporate Trainer</p>
-      </article>
-      <!-- Add more advisors above this card. -->
-      <article class="person small empty reveal">
-        <div class="avatar" aria-hidden="true">+</div>
-        <h3>Advisory board growing</h3>
-      </article>
-    </div>
-  </section>
-
-  <!-- 6. Coming soon -->
+  <!-- Coming soon -->
   <section id="soon" class="soon" aria-labelledby="soon-title">
+    <p class="eyebrow center">On the roadmap</p>
     <h2 id="soon-title" class="section-title">What's next</h2>
-    <div class="cards soon-grid">
-      <article class="soon-card reveal"><span class="badge">Coming soon</span><h3>Property board</h3><p>See every floor, every room, the whole property at a glance.</p></article>
-      <article class="soon-card reveal"><span class="badge">Coming soon</span><h3>Shift planner</h3><p>Plan floor and service coverage before the shift starts.</p></article>
-      <article class="soon-card reveal"><span class="badge">Coming soon</span><h3>Operations pulse</h3><p>Live task health and risk across the whole property.</p></article>
-      <article class="soon-card reveal"><span class="badge">Coming soon</span><h3>Automated shift handover</h3><p>Unfinished work and guest promises pass to the next shift on their own.</p></article>
+    <div class="soon-grid">
+      <article class="soon-card reveal"><span class="badge">Coming soon</span><div class="soon-art a1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>Property board</h3><p>See every floor, every room, the whole property at a glance.</p></article>
+      <article class="soon-card reveal"><span class="badge">Coming soon</span><div class="soon-art a2" aria-hidden="true"><i></i><i></i><i></i><i></i></div><h3>Shift planner</h3><p>Plan floor and service coverage before the shift starts.</p></article>
+      <article class="soon-card reveal"><span class="badge">Coming soon</span><div class="soon-art a3" aria-hidden="true"><svg viewBox="0 0 120 40"><path d="M0 24 L20 24 L28 10 L36 34 L44 18 L52 24 L120 24"/></svg></div><h3>Operations pulse</h3><p>Live task health and risk across the whole property.</p></article>
+      <article class="soon-card reveal"><span class="badge">Coming soon</span><div class="soon-art a4" aria-hidden="true"><i></i><b>→</b><i></i></div><h3>Automated shift handover</h3><p>Unfinished work and guest promises pass to the next shift on their own.</p></article>
     </div>
   </section>
 
-  <!-- 7. Close -->
+  <!-- Close -->
   <section id="contact" class="close">
+    <div class="close-glow" aria-hidden="true"></div>
+    <img src="logo.svg" alt="" width="64" height="64" class="close-logo">
     <h2>Your standards, done every time.</h2>
+    <p>Mise is care.</p>
     <a class="btn btn-primary" id="contactBtn" href="mailto:hello@misehotel.com">Talk to us</a>
   </section>
 </main>
 
 <footer class="foot">
-  <img src="logo.svg" alt="" width="24" height="24"> Mise is care.
+  <img src="logo.svg" alt="" width="22" height="22"> Mise is care. <span>hello@misehotel.com</span>
 </footer>
 
 <script src="journey-data.js"></script>
