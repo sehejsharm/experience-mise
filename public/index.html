@@ -70,6 +70,8 @@
     <article class="problem reveal">
       <div class="problem-art" aria-hidden="true">
         <svg viewBox="0 0 200 200" class="art-binder">
+          <defs><linearGradient id="gPage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4c55"/><stop offset="1" stop-color="#0f3138"/></linearGradient></defs>
+          <ellipse class="floor" cx="106" cy="182" rx="58" ry="6"/>
           <rect class="page p1" x="50" y="40" width="100" height="130" rx="8"/>
           <rect class="page p2" x="56" y="34" width="100" height="130" rx="8"/>
           <rect class="page p3" x="62" y="28" width="100" height="130" rx="8"/>
@@ -86,9 +88,12 @@
     <article class="problem reveal">
       <div class="problem-art" aria-hidden="true">
         <svg viewBox="0 0 200 200" class="art-radar">
+          <defs><linearGradient id="gSweep" gradientUnits="userSpaceOnUse" x1="112" y1="22" x2="162" y2="76"><stop offset="0" stop-color="#7FE3C4" stop-opacity="0"/><stop offset="1" stop-color="#7FE3C4" stop-opacity=".42"/></linearGradient></defs>
+          <circle class="ticks" cx="100" cy="100" r="88"/>
+          <path class="cross" d="M100 20v160M20 100h160"/>
           <circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="54"/><circle cx="100" cy="100" r="28"/>
-          <path class="sweep" d="M100 100 L100 20 A80 80 0 0 1 169 60 Z"/>
-          <circle class="blip b1" cx="140" cy="70" r="5"/><circle class="blip b2" cx="64" cy="132" r="5"/><circle class="blip b3 risk" cx="128" cy="142" r="6"/>
+          <g class="sweep"><path d="M100 100 L100 20 A80 80 0 0 1 169 60 Z"/><path class="beam" d="M100 100 L169 60"/></g>
+          <circle class="blip b1" cx="140" cy="70" r="5"/><circle class="blip b2" cx="64" cy="132" r="5"/><circle class="ping" cx="128" cy="142" r="6"/><circle class="blip b3 risk" cx="128" cy="142" r="6"/>
         </svg>
       </div>
       <div>
@@ -103,6 +108,8 @@
           <rect x="48" y="30" width="104" height="146" rx="10"/>
           <rect class="clip" x="78" y="22" width="44" height="16" rx="5"/>
           <g class="rows"><path d="M66 70h12M88 70h48"/><path d="M66 98h12M88 98h40"/><path d="M66 126h12M88 126h44"/></g>
+          <defs><radialGradient id="gQ"><stop offset="0" stop-color="#F2A93B" stop-opacity=".45"/><stop offset="1" stop-color="#F2A93B" stop-opacity="0"/></radialGradient></defs>
+          <circle class="qglow" cx="100" cy="153" r="22"/>
           <text x="100" y="164" class="q">?</text>
         </svg>
       </div>
@@ -150,6 +157,7 @@
       <aside class="stage-side" aria-live="polite">
         <div class="ring-wrap">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><linearGradient id="gRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FE3C4"/><stop offset="1" stop-color="#F2A93B"/></linearGradient></defs>
             <circle class="ring-bg" cx="60" cy="60" r="52"/>
             <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"/>
           </svg>
