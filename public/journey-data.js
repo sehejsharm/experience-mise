@@ -2,7 +2,6 @@
  * Experience manifest. Edit here only — no other code changes needed.
  *
  * kind: "screen" → a real product screenshot in a frame.
- *       "scene"  → an animated illustration (no product UI is faked).
  * src: path under /public/screens/ (null = "coming soon" placeholder).
  * viewport: "desktop" → browser frame, "mobile" → phone frame.
  * hotspot: position as % of image width / height.
@@ -12,10 +11,6 @@
 window.MISE_CONTACT_HREF = "mailto:hello@misehotel.com";
 
 window.MISE_JOURNEY = [
-  { kind: "scene", scene: "intake", short: "Bring it in", role: "Author",
-    title: "Start with what you already have.",
-    caption: "Binders, chat threads, a supervisor's memory. Mise brings them into one place.",
-    points: ["Your hotel's own standards", "Every department", "Nothing rewritten for you"] },
 
   { kind: "screen", src: "screens/author_standards_queue.jpg", short: "One queue", callout: "Confirm & publish", role: "Author", viewport: "desktop",
     title: "One queue for every standard.",
@@ -50,10 +45,5 @@ window.MISE_JOURNEY = [
   { kind: "screen", src: "screens/manager_sop_results_dashboard.jpg", short: "Results", callout: "See what changed", role: "Manager", viewport: "desktop",
     title: "Scored by what changed.",
     caption: "Every standard, scored by what actually changed.", hotspot: { x: 81, y: 69 },
-    points: ["Observed outcomes, not completions", "Compare roles and properties", "Reinforce what works"] },
-
-  { kind: "scene", scene: "record", short: "Record", role: "Manager",
-    title: "An audit-ready service record.",
-    caption: "Every task, photo and sign-off, kept as one record you can show an inspector.",
-    points: ["Timestamped evidence", "Supervisor sign-offs", "Ready when the inspector is"] }
+    points: ["Observed outcomes, not completions", "Compare roles and properties", "Reinforce what works"] }
 ];
