@@ -1,0 +1,43 @@
+/* Financial impact: per-case boxes and the calculator */
+.impact { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: linear-gradient(160deg, rgba(242,169,59,.12), rgba(242,169,59,.03)); border: 1px solid rgba(242,169,59,.28); }
+.impact-label { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.impact-num { display: block; margin: 4px 0 6px; font-size: 26px; font-weight: 800; letter-spacing: -.02em; color: var(--amber); }
+.impact p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+
+.calc { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; padding: 28px; border-radius: 28px; background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); border: 1px solid var(--line); box-shadow: 0 40px 120px rgba(0,0,0,.3); }
+.calc-inputs { display: grid; gap: 18px; min-width: 0; }
+.calc fieldset { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; min-width: 0; }
+.calc legend { grid-column: 1 / -1; padding: 0; margin-bottom: 10px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--mint); }
+.calc label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--ink-2); min-width: 0; }
+.calc input[type="number"] { font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); background: rgba(0,0,0,.22); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; min-height: 44px; width: 100%; }
+.calc input[type="number"]:focus-visible { outline: 2px solid var(--mint); outline-offset: 1px; border-color: transparent; }
+.calc-levers { grid-template-columns: 1fr !important; }
+.calc .range { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.calc .range output { font-weight: 700; color: var(--amber); }
+.calc input[type="range"] { width: 100%; accent-color: var(--amber); min-height: 32px; }
+.calc-presets { display: flex; gap: 8px; }
+.calc-presets button { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; padding: 10px 16px; min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink-2); transition: all .2s; }
+.calc-presets button[aria-pressed="true"] { background: var(--mint); border-color: var(--mint); color: var(--bg); }
+
+.calc-out { display: flex; flex-direction: column; padding: 24px; border-radius: 20px; background: rgba(0,0,0,.22); border: 1px solid rgba(242,169,59,.25); min-width: 0; }
+.calc-out-label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.calc-total { font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; margin: 6px 0 4px; background: linear-gradient(120deg, var(--amber-2), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.calc-pct { color: var(--mint); font-weight: 600; font-size: 15px; }
+.calc-bars { list-style: none; padding: 0; margin: 22px 0 16px; display: grid; gap: 12px; }
+.calc-bars li { display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); }
+.calc-bars b { color: var(--ink); white-space: nowrap; }
+.cbar { height: 10px; border-radius: 6px; background: rgba(255,255,255,.07); overflow: hidden; }
+.cbar i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--mint), var(--amber)); transition: width .5s var(--ease); }
+.calc-base { font-size: 12px; color: var(--ink-3); margin: 0 0 20px; }
+.calc-out .btn { margin-top: 4px; align-self: flex-start; }
+.calc-note { max-width: 820px; margin: 20px auto 0; text-align: center; font-size: 12px; line-height: 1.6; color: var(--ink-3); }
+
+@media (max-width: 900px) {
+  .calc { grid-template-columns: minmax(0, 1fr); padding: 18px; }
+}
+@media (max-width: 420px) {
+  .calc fieldset { grid-template-columns: minmax(0, 1fr); }
+  .calc-bars li { grid-template-columns: 84px minmax(0, 1fr) auto; }
+  .calc-out .btn { align-self: stretch; }
+}
+@media (prefers-reduced-motion: reduce) { .cbar i { transition: none; } }

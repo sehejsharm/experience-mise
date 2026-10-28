@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="calculator.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -26,7 +27,7 @@
     <img src="logo.svg" alt="" width="34" height="34"><span>Mise</span>
   </a>
   <nav class="nav" aria-label="Sections">
-    <a href="#problems">Why</a><a href="#advisors">Advisors</a><a href="#journey">Experience</a><a href="#evidence">Evidence</a>
+    <a href="#problems">Why</a><a href="#advisors">Advisors</a><a href="#journey">Experience</a><a href="#evidence">Evidence</a><a href="#impact">Impact</a>
   </nav>
   <a class="btn btn-ghost" href="mailto:hello@misehotel.com">Talk to us</a>
 </header>
@@ -186,6 +187,7 @@
           <div class="bar-row hi"><span>Value 2025</span><div class="bar"><i style="--w:100%"></i></div><b>₹5,850 Cr</b></div>
           <p class="viz-cap">Brand value up <span class="count" data-to="22">0</span>% in a year</p>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹21 L / year</b><p>A consistent stay lifts review scores. Every 0.1★ is worth about 1.1% on room rate at the same occupancy.</p></div>
         <a class="src" href="https://brandfinance.com/press-releases/taj-retains-title-as-the-worlds-strongest-hotel-brand-ranked-in-2025" target="_blank" rel="noopener">Source: Brand Finance 2025; IHCL</a>
       </article>
 
@@ -198,6 +200,7 @@
           <div class="stat"><b><span class="count" data-to="100">0</span>+</b><span>operating hotels</span></div>
           <div class="stat"><b><span class="count" data-to="250">0</span></b><span>in the portfolio</span></div>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹3.1 Cr / year</b><p>Run one standard across 10 hotels and the conservative ₹31 L-per-hotel gain repeats ten times.</p></div>
         <a class="src" href="https://www.businesstraveller.com/business-travel/ihcl-unveils-its-flagship-ginger-at-mumbai-airport/" target="_blank" rel="noopener">Source: IHCL / Business Traveller</a>
       </article>
 
@@ -210,6 +213,7 @@
           <div class="drop-col hi"><i style="--h:100%"></i><b>100</b><span>2024</span></div>
           <div class="drop-badge">×<span class="count" data-to="100">0</span></div>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹13.5 L / year</b><p>Training that sticks cuts attrition. Going from 30% to 20% saves 15 resignations a year, at about ₹90,000 each.</p></div>
         <a class="src" href="https://en.wikipedia.org/wiki/Lemon_Tree_Hotels" target="_blank" rel="noopener">Source: Lemon Tree Hotels; Wikipedia</a>
       </article>
 
@@ -222,6 +226,7 @@
           <div class="bar-row hi"><span>Ritz-Carlton</span><div class="bar"><i style="--w:20%"></i></div><b><span class="count" data-to="20">0</span>%</b></div>
           <p class="viz-cap">Employee turnover, as reported by the company</p>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹40 L / year</b><p>What turnover already costs a 150-person hotel at 30% attrition. Every resignation costs about 30% of a year's pay.</p></div>
         <a class="src" href="https://www.nist.gov/blogs/blogrige/customer-really-always-right-hotel-company-invests-its-employees-first" target="_blank" rel="noopener">Source: NIST Baldrige</a>
       </article>
 
@@ -234,6 +239,7 @@
           <div class="stat"><b>−<span class="count" data-to="10">0</span>%</b><span>housekeeping turnover</span></div>
           <div class="stat"><b>~<span class="count" data-to="2">0</span>h</b><span>rooms ready sooner</span></div>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹18 L / year</b><p>20% more productivity from a ₹90 L housekeeping team: more rooms covered without hiring.</p></div>
         <a class="src" href="https://hoteltechreport.com/success-stories/marketing/optii/staycity-aparthotels" target="_blank" rel="noopener">Source: Hotel Tech Report (verified case study)</a>
       </article>
 
@@ -246,6 +252,7 @@
           <div class="drop-col hi"><i style="--h:92.6%"></i><b>26.1</b><span>after</span></div>
           <div class="drop-badge">−<span class="count" data-to="7.4" data-dec="1">0</span>%</div>
         </div>
+        <div class="impact"><span class="impact-label">For a 100-room Indian hotel</span><b class="impact-num">≈ ₹6.7 L / year</b><p>7.4% less time per room across a 30-person housekeeping team, with quality held.</p></div>
         <a class="src" href="https://info.hoteleffectiveness.com/hubfs/Housekeeping_Case_Study-6.pdf" target="_blank" rel="noopener">Source: Hotel Effectiveness (vendor test)</a>
       </article>
     </div>
@@ -267,6 +274,56 @@
         </figure>
       </div>
     </div>
+  </section>
+
+  <!-- Impact calculator -->
+  <section id="impact" class="calc-section" aria-labelledby="calc-title">
+    <p class="eyebrow center">What it's worth</p>
+    <h2 id="calc-title" class="section-title">Put your hotel's numbers in.</h2>
+    <p class="section-sub">Consistency pays in three places: the rate you can charge, the people you keep, and the hours your teams get back. Defaults are India's 2024 averages for a 100-room hotel.</p>
+
+    <div class="calc reveal">
+      <form class="calc-inputs" id="calcForm" onsubmit="return false">
+        <fieldset>
+          <legend>Your hotel</legend>
+          <label>Rooms <input type="number" name="rooms" value="100" min="1" step="1" inputmode="numeric"></label>
+          <label>Average room rate (₹) <input type="number" name="adr" value="7951" min="0" step="100" inputmode="numeric"></label>
+          <label>Occupancy (%) <input type="number" name="occ" value="64" min="0" max="100" step="1" inputmode="numeric"></label>
+          <label>Properties <input type="number" name="props" value="1" min="1" step="1" inputmode="numeric"></label>
+          <label>Staff per room <input type="number" name="spr" value="1.5" min="0" step="0.1" inputmode="decimal"></label>
+          <label>Avg monthly cost per staff (₹) <input type="number" name="pay" value="25000" min="0" step="1000" inputmode="numeric"></label>
+          <label>Annual attrition (%) <input type="number" name="attr" value="30" min="0" max="200" step="1" inputmode="numeric"></label>
+          <label>Housekeeping share of staff (%) <input type="number" name="hk" value="20" min="0" max="100" step="1" inputmode="numeric"></label>
+        </fieldset>
+        <fieldset class="calc-levers">
+          <legend>What consistency changes</legend>
+          <label class="range">Review score lift <output data-for="lift">+0.1★</output>
+            <input type="range" name="lift" min="0" max="0.5" step="0.05" value="0.1"></label>
+          <label class="range">Fewer resignations <output data-for="ret">10%</output>
+            <input type="range" name="ret" min="0" max="50" step="1" value="10"></label>
+          <label class="range">Housekeeping time saved <output data-for="prod">7.4%</output>
+            <input type="range" name="prod" min="0" max="25" step="0.1" value="7.4"></label>
+          <div class="calc-presets" role="group" aria-label="Scenario">
+            <button type="button" data-preset="conservative" aria-pressed="true">Conservative</button>
+            <button type="button" data-preset="strong" aria-pressed="false">Stronger</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="calc-out" aria-live="polite">
+        <span class="calc-out-label">Estimated gain per year</span>
+        <b class="calc-total" id="calcTotal">₹31.5 L</b>
+        <span class="calc-pct" id="calcPct">1.7% of rooms revenue</span>
+        <ul class="calc-bars">
+          <li><span>Pricing power</span><div class="cbar"><i id="barPrice"></i></div><b id="valPrice"></b></li>
+          <li><span>Staff kept</span><div class="cbar"><i id="barRet"></i></div><b id="valRet"></b></li>
+          <li><span>Hours back</span><div class="cbar"><i id="barProd"></i></div><b id="valProd"></b></li>
+        </ul>
+        <p class="calc-base" id="calcBase"></p>
+        <a class="btn btn-primary" href="mailto:hello@misehotel.com?subject=Mise%20impact%20estimate">Walk us through your numbers</a>
+      </div>
+    </div>
+    <p class="calc-note">An estimate, not a promise. Pricing uses Cornell research (Chris K. Anderson): one extra review point on a 5-point scale supports about 11.2% higher rates at the same occupancy. Turnover cost uses Cornell's estimate of about 30% of annual pay per resignation. Housekeeping figures follow the Staycity and Hotel Effectiveness results above. Defaults: Horwath HTL India 2024 averages and FHRAI staffing ratios.</p>
   </section>
 
   <!-- Coming soon -->
@@ -297,5 +354,6 @@
 
 <script src="journey-data.js"></script>
 <script src="app.js"></script>
+<script src="calculator.js"></script>
 </body>
 </html>
