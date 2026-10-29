@@ -16,11 +16,15 @@
   var touch = window.matchMedia("(hover: none)").matches;
   var verb = touch ? "Tap" : "Click";
   var PUSH_MS = 520;
+  // Zoom brings the action up close: phones start zoomed in, larger screens start at fit.
+  var narrow = window.matchMedia("(max-width: 700px)");
+  function zoomLevel() { return narrow.matches ? 3 : 1.8; }
 
   var ICON = {
     prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
     next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
     restart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/></svg>',
+    zoom: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>',
     hints: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2.5"/><path d="M12 3v2M12 19v2M3 12H1M23 12h-2"/></svg>',
     present: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
@@ -165,6 +169,7 @@
       '<div class="proto-bar-l"><span class="proto-dot" aria-hidden="true"></span><span class="proto-name"></span></div>' +
       '<label class="proto-pick"><span class="sr-only">Go to screen</span><select></select></label>' +
       '<div class="proto-bar-r">' +
+        '<button type="button" class="proto-btn" data-act="zoom" aria-pressed="false" title="Zoom in on the action">' + ICON.zoom + '<span class="sr-only">Zoom in on the action</span></button>' +
         '<button type="button" class="proto-btn" data-act="hints" aria-pressed="true" title="Show clickable areas">' + ICON.hints + '<span class="sr-only">Show clickable areas</span></button>' +
         '<button type="button" class="proto-btn" data-act="restart" title="Restart flow">' + ICON.restart + '<span class="sr-only">Restart flow</span></button>' +
         '<button type="button" class="proto-btn" data-act="prev" title="Previous screen">' + ICON.prev + '<span class="sr-only">Previous screen</span></button>' +
@@ -241,6 +246,8 @@
         img.src = s.src;
         img.width = im.naturalWidth; img.height = im.naturalHeight;
         shot.style.aspectRatio = im.naturalWidth + " / " + im.naturalHeight;
+        shot._ar = im.naturalWidth / im.naturalHeight;
+        focus();
       });
       return slide;
     });
@@ -259,6 +266,34 @@
     });
 
     /* ---- Behaviour ---- */
+    // Zoomed in, each screen is scaled around its action and kept inside the frame.
+    function focus() {
+      var on = proto.classList.contains("is-zoomed");
+      var sw = screen.clientWidth, sh = screen.clientHeight, z = zoomLevel();
+      slides.forEach(function (sl, k) {
+        var shot = sl.firstChild, h = screens[k].hotspot;
+        if (!on || !h || !sw || !sh) {
+          shot.style.removeProperty("--z"); shot.style.removeProperty("--tx"); shot.style.removeProperty("--ty");
+          return;
+        }
+        var r = sh / (sw / (shot._ar || sw / sh));   // frame height in shot heights
+        var fx = (h.x + Math.min(h.w, 80 / z) / 2) / 100;
+        var fy = (h.y + Math.min(h.h, 80 * r / z) / 2) / 100;
+        var tx = Math.min(0, Math.max(1 - z, 0.5 - z * fx));
+        var ty = Math.min(0, Math.max(r - z, 0.5 * r - z * fy));
+        shot.style.setProperty("--z", z);
+        shot.style.setProperty("--tx", (tx * 100).toFixed(2) + "%");
+        shot.style.setProperty("--ty", (ty * 100).toFixed(2) + "%");
+      });
+    }
+
+    function setZoom(on) {
+      proto.classList.toggle("is-zoomed", on);
+      btn("zoom").setAttribute("aria-pressed", String(on));
+      btn("zoom").setAttribute("title", on ? "Fit the whole screen" : "Zoom in on the action");
+      focus();
+    }
+
     function flash() {
       proto.classList.remove("is-flash");
       void proto.offsetWidth;
@@ -376,6 +411,7 @@
       document.documentElement.classList.toggle("proto-open", on);
       presenting = on ? api : null;
       btn("present").setAttribute("title", on ? "Exit presentation" : "Present");
+      focus();
       if (on) exitBtn.focus({ preventScroll: true }); else proto.focus({ preventScroll: true });
     }
 
@@ -383,6 +419,9 @@
     btn("next").addEventListener("click", function () { advance(); });
     btn("restart").addEventListener("click", function () { restart(false); });
     btn("present").addEventListener("click", function () { present(!proto.classList.contains("is-presenting")); });
+    btn("zoom").addEventListener("click", function () { setZoom(!proto.classList.contains("is-zoomed")); });
+    var raf = 0;
+    window.addEventListener("resize", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(focus); });
     btn("hints").addEventListener("click", function () {
       hintsOn = !hintsOn;
       proto.classList.toggle("hints-off", !hintsOn);
@@ -417,6 +456,7 @@
     }
 
     render();
+    setZoom(narrow.matches);
     var api = { present: present, reveal: reveal };
     return api;
   }
