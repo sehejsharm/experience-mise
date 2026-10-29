@@ -450,7 +450,10 @@
     });
 
     function reveal(focus) {
-      var y = art.getBoundingClientRect().top + window.scrollY - (document.querySelector(".top") || { offsetHeight: 0 }).offsetHeight - 24;
+      // offsetTop ignores the fade-in transform, so the flow lands exactly under the site bar.
+      var y = 0;
+      for (var n = art; n; n = n.offsetParent) y += n.offsetTop;
+      y -= (document.querySelector(".top") || { offsetHeight: 0 }).offsetHeight + 16;
       window.scrollTo({ top: Math.max(0, y), behavior: reduce ? "auto" : "smooth" });
       if (focus) proto.focus({ preventScroll: true });
     }
