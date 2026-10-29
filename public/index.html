@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="calculator.css">
+<link rel="stylesheet" href="flows.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -127,55 +128,42 @@
     <h2 id="adv-title" class="section-title">The people who keep us honest.</h2>
     <div class="adv-grid">
       <article class="adv reveal">
-        <div class="adv-photo"><img src="advisors/parul-sharma.jpeg" alt="Portrait of Parul Sharma" loading="lazy"></div>
-        <div class="adv-body"><h3>Parul Sharma</h3><p class="adv-role">Founder, All of Finesse</p><p class="adv-bio">Has spent 25 years training hotels across India to keep their standards, and raise them.</p><ul class="adv-chips" aria-label="Background"><li>IHM Aurangabad, first batch</li><li>Former IHM faculty</li><li>25+ years</li></ul></div>
+        <div class="adv-frame"><div class="adv-photo"><img src="advisors/parul-sharma.jpeg" alt="Portrait of Parul Sharma" loading="lazy"></div></div>
+        <div class="adv-body">
+          <h3>Parul Sharma</h3>
+          <div class="adv-brand"><span class="adv-brand-k">Founder</span><span class="adv-brand-plate is-word"><span class="adv-brand-name">All of Finesse</span></span></div>
+          <p class="adv-bio">Has spent 25 years training hotels across India to keep their standards, and raise them.</p>
+          <ul class="adv-chips" aria-label="Background"><li>IHM Aurangabad, first batch</li><li>Former IHM faculty</li><li>25+ years</li></ul>
+        </div>
       </article>
       <article class="adv reveal">
-        <div class="adv-photo"><img src="advisors/renu-mehra.jpeg" alt="Portrait of Renu Mehra" loading="lazy"></div>
-        <div class="adv-body"><h3>Renu Mehra</h3><p class="adv-role">Founder, RMIC</p><p class="adv-bio">A leading name in India for luxury image consulting and corporate training.</p><ul class="adv-chips" aria-label="Background"><li>Luxury &amp; celebrity image</li><li>Corporate trainer</li></ul></div>
+        <div class="adv-frame"><div class="adv-photo"><img src="advisors/renu-mehra.jpeg" alt="Portrait of Renu Mehra" loading="lazy"></div></div>
+        <div class="adv-body">
+          <h3>Renu Mehra</h3>
+          <div class="adv-brand"><span class="adv-brand-k">Founder</span><span class="adv-brand-plate is-fill"><img class="adv-brand-logo" src="advisors/logos/rmic.jpg" alt="RMIC" width="800" height="333" loading="lazy" decoding="async"></span></div>
+          <p class="adv-bio">A leading name in India for luxury image consulting and corporate training.</p>
+          <ul class="adv-chips" aria-label="Background"><li>Luxury &amp; celebrity image</li><li>Corporate trainer</li></ul>
+        </div>
       </article>
       <article class="adv reveal">
-        <div class="adv-photo"><img src="advisors/sanchita-ralhan.jpeg" alt="Portrait of Sanchita Ralhan" loading="lazy"></div>
-        <div class="adv-body"><h3>Sanchita Ralhan</h3><p class="adv-role">Founder, The Hospitality Doctor</p><p class="adv-bio">Works where hotel standards meet real people: warmth in service, clarity in process, ownership on the floor.</p><ul class="adv-chips" aria-label="Worked with"><li>Oberoi</li><li>The Leela</li><li>Shangri-La</li><li>15+ years</li></ul></div>
+        <div class="adv-frame"><div class="adv-photo"><img src="advisors/sanchita-ralhan.jpeg" alt="Portrait of Sanchita Ralhan" loading="lazy"></div></div>
+        <div class="adv-body">
+          <h3>Sanchita Ralhan</h3>
+          <div class="adv-brand"><span class="adv-brand-k">Founder</span><span class="adv-brand-plate is-dark"><img class="adv-brand-logo" src="advisors/logos/the-hospitality-doctor.png" alt="The Hospitality Doctor" width="238" height="441" loading="lazy" decoding="async"></span></div>
+          <p class="adv-bio">Works where hotel standards meet real people: warmth in service, clarity in process, ownership on the floor.</p>
+          <ul class="adv-chips" aria-label="Worked with"><li>Oberoi</li><li>The Leela</li><li>Shangri-La</li><li>15+ years</li></ul>
+        </div>
       </article>
     </div>
   </section>
 
-  <!-- Experience -->
-  <section id="journey" class="journey" aria-labelledby="journey-title">
+  <!-- Experience: one prototype per portal -->
+  <section id="journey" class="journey flows" aria-labelledby="journey-title">
     <p class="eyebrow center">The experience</p>
-    <h2 id="journey-title" class="section-title">From a standard on paper to proof on the floor.</h2>
-    <div class="role-rail" id="roleRail" aria-hidden="true">
-      <span data-role="Author">Author</span><i></i><span data-role="Staff">Staff</span><i></i><span data-role="Manager">Manager</span>
-    </div>
-
-    <div class="journey-stage" id="journeyStage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Product experience. Use left and right arrow keys.">
-      <div class="stage-visual">
-        <div class="frame-wrap" id="frameWrap"></div>
-      </div>
-
-      <aside class="stage-side" aria-live="polite">
-        <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
-            <defs><linearGradient id="gRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FE3C4"/><stop offset="1" stop-color="#F2A93B"/></linearGradient></defs>
-            <circle class="ring-bg" cx="60" cy="60" r="52"/>
-            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"/>
-          </svg>
-          <div class="ring-label"><b id="jNum">1</b><span id="jTotal">/ 9</span></div>
-        </div>
-        <span class="role" id="jRole"></span>
-        <h3 class="side-title" id="jTitle"></h3>
-        <p class="side-cap" id="jCaption"></p>
-        <ul class="tiles" id="jTiles"></ul>
-      </aside>
-
-      <div class="journey-controls">
-        <button class="btn btn-round" id="jPrev" aria-label="Previous step">←</button>
-        <button class="btn btn-round play" id="jPlay" aria-label="Pause tour" aria-pressed="true"><span class="i-pause"></span></button>
-        <button class="btn btn-round" id="jNext" aria-label="Next step">→</button>
-      </div>
-      <ol class="timeline" id="jDots" aria-label="Tour steps"></ol>
-    </div>
+    <h2 id="journey-title" class="section-title">Four flows. Three portals. One standard.</h2>
+    <p class="section-sub">Each portal has its own flow. Click through them the way you would a prototype: the author writes it, the manager sends it, the employee does it, and the manager reviews what happened.</p>
+    <nav class="flow-index" id="flowIndex" aria-label="Flows"></nav>
+    <div class="flows-root" id="flowsRoot"></div>
   </section>
 
   <!-- Evidence / case studies -->
@@ -360,8 +348,9 @@
   <img src="logo.svg" alt="" width="22" height="22"> Mise is care. <span>hello@misehotel.com</span>
 </footer>
 
-<script src="journey-data.js"></script>
+<script src="flows-data.js"></script>
 <script src="app.js"></script>
+<script src="flows.js"></script>
 <script src="calculator.js"></script>
 </body>
 </html>
