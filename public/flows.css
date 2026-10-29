@@ -6,7 +6,7 @@
 .flows .section-sub { margin-bottom: 36px; }
 
 /* Flow index: the four flows in story order */
-.flow-index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 auto 56px; max-width: 1120px; counter-reset: flow; }
+.flow-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 auto 56px; max-width: 1120px; counter-reset: flow; }
 .flow-chip { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; padding: 14px 16px; border-radius: var(--r-md); text-decoration: none; color: var(--ink); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line), var(--hl); transition: box-shadow .25s, transform .25s var(--ease); }
 .flow-chip:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--line-3), var(--hl); }
 .flow-chip-n { grid-row: 1 / 3; font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--amber); line-height: 1; }
@@ -125,15 +125,20 @@ html.proto-open, html.proto-open body { overflow: hidden; }
 .proto.is-presenting .proto-btn[data-act="present"] { color: #6CC4FF; background: rgba(13, 153, 255, .14); }
 
 @media (max-width: 1000px) {
-  .flow-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .flow { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .flow-info { position: static; }
   .flow-steps { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 }
 @media (max-width: 700px) {
   .flow-index { gap: 8px; margin-bottom: 40px; }
-  .flow-chip { padding: 12px; column-gap: 10px; }
-  .flow-chip-t { font-size: 13px; }
+  .flow-chip { padding: 12px 10px; column-gap: 8px; }
+  .flow-chip-n { font-size: 22px; }
+  .flow-chip-p { font-size: 10.5px; letter-spacing: .08em; }
+  .flow-chip-t { display: none; }
+  .flow-steps { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: 16px; scrollbar-width: none; margin-inline: -16px; padding: 2px 16px 4px; }
+  .flow-steps::-webkit-scrollbar { display: none; }
+  .flow-steps > li { flex: none; scroll-snap-align: start; }
+  .flow-step { width: auto; white-space: nowrap; min-height: 44px; padding: 8px 14px 8px 10px; font-size: 14px; }
   .flows-root { gap: 56px; }
   .flow-n { font-size: 36px; }
   .proto { border-radius: var(--r-lg); margin-inline: -4px; }

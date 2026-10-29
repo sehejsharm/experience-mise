@@ -296,6 +296,11 @@
         b.classList.toggle("is-done", k < cur || (done && k === LAST));
         if (k === cur) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
       });
+      // On small screens the step list scrolls sideways; keep the current step in view.
+      if (stepsEl.scrollWidth > stepsEl.clientWidth) {
+        var dx = stepBtns[cur].getBoundingClientRect().left - stepsEl.getBoundingClientRect().left;
+        stepsEl.scrollTo({ left: stepsEl.scrollLeft + dx - 16, behavior: reduce ? "auto" : "smooth" });
+      }
       slides.forEach(function (sl, k) {
         var h = sl.querySelector(".proto-hot");
         if (h) h.tabIndex = k === cur ? 0 : -1;
