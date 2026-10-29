@@ -1,10 +1,9 @@
 Advisor brand logos, shown on the advisor cards in index.html.
 
+  all-of-finesse.png           Parul Sharma (All of Finesse)
   rmic.jpg                     Renu Mehra (RMIC)
   the-hospitality-doctor.png   Sanchita Ralhan (The Hospitality Doctor)
-  all-of-finesse.png           not shown yet: the artwork reads "Renu Mehra's 'ALL' of finesse",
-                               but the site credits All of Finesse to Parul Sharma. Confirm before using.
 
-To show a logo, replace the card's <span class="adv-brand-plate is-word">…</span> with
+Each card shows its logo in a plate:
 <span class="adv-brand-plate"><img class="adv-brand-logo" src="advisors/logos/FILE" alt="BRAND"></span>
-Add "is-dark" to the plate for logos on black.
+Plate variants: "is-fill" (logo fills the plate), "is-dark" (black), "is-green" (All of Finesse green).
