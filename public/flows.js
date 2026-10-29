@@ -196,6 +196,8 @@
       device.querySelector(".proto-chrome span").textContent = "Mise · " + flow.portal + " portal";
     }
     var screen = el("div", "proto-screen");
+    var tip = el("span", "proto-tip", "Drag to look around");
+    tip.setAttribute("aria-hidden", "true");
     device.appendChild(screen);
     canvas.appendChild(device);
 
@@ -252,6 +254,8 @@
       return slide;
     });
 
+    screen.appendChild(tip);
+
     // The screen takes the widest image's proportions, so nothing letterboxes.
     Promise.all(screens.map(function (s) { return load(s.src); })).then(function (ims) {
       var best = null;
@@ -265,26 +269,58 @@
       flash();
     });
 
-    /* ---- Behaviour ---- */
-    // Zoomed in, each screen is scaled around its action and kept inside the frame.
+    /* ---- Camera ----
+     * Zoomed in, each screen opens whole, then the camera glides in on its action.
+     * While close up, drag to look around the rest of the screen. */
+    var camTimer = 0, tipTimer = 0, seen = false, tipped = false;
+    function zoomed() { return proto.classList.contains("is-zoomed"); }
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+
+    // Where the camera sits for each screen, in pixels of the frame.
     function focus() {
-      var on = proto.classList.contains("is-zoomed");
       var sw = screen.clientWidth, sh = screen.clientHeight, z = zoomLevel();
       slides.forEach(function (sl, k) {
         var shot = sl.firstChild, h = screens[k].hotspot;
-        if (!on || !h || !sw || !sh) {
-          shot.style.removeProperty("--z"); shot.style.removeProperty("--tx"); shot.style.removeProperty("--ty");
-          return;
-        }
-        var r = sh / (sw / (shot._ar || sw / sh));   // frame height in shot heights
+        if (!sw || !sh) return;
+        var hs = sw / (shot._ar || sw / sh);   // the screen's height when it fits the frame
+        shot.style.setProperty("--oy", Math.max(0, (sh - hs) / 2).toFixed(1) + "px");
+        if (!h) { shot._cam = null; return; }
         var fx = (h.x + Math.min(h.w, 80 / z) / 2) / 100;
-        var fy = (h.y + Math.min(h.h, 80 * r / z) / 2) / 100;
-        var tx = Math.min(0, Math.max(1 - z, 0.5 - z * fx));
-        var ty = Math.min(0, Math.max(r - z, 0.5 * r - z * fy));
-        shot.style.setProperty("--z", z);
-        shot.style.setProperty("--tx", (tx * 100).toFixed(2) + "%");
-        shot.style.setProperty("--ty", (ty * 100).toFixed(2) + "%");
+        var fy = (h.y + Math.min(h.h, 80 * sh / hs / z) / 2) / 100;
+        var minX = sw * (1 - z), minY = Math.min(0, sh - z * hs);
+        shot._cam = { z: z, x: clamp(sw * (0.5 - z * fx), minX, 0), y: clamp(sh / 2 - z * fy * hs, minY, 0), minX: minX, minY: minY };
+        place(shot);
       });
+    }
+
+    // Apply the camera, plus any drag, to one screen.
+    function place(shot) {
+      var c = shot._cam, p = shot._pan || { x: 0, y: 0 };
+      if (!c) return;
+      shot.style.setProperty("--z", c.z);
+      shot.style.setProperty("--cx", clamp(c.x + p.x, c.minX, 0).toFixed(1) + "px");
+      shot.style.setProperty("--cy", clamp(c.y + p.y, c.minY, 0).toFixed(1) + "px");
+    }
+
+    function camIn(shot, delay) {
+      clearTimeout(camTimer);
+      if (!zoomed() || !shot._cam) return;
+      camTimer = setTimeout(function () {
+        shot.classList.add("is-focused");
+        if (touch && !tipped) {
+          tipped = true;
+          clearTimeout(tipTimer);
+          tipTimer = setTimeout(function () {
+            tip.classList.add("is-on");
+            tipTimer = setTimeout(function () { tip.classList.remove("is-on"); }, 2600);
+          }, reduce ? 0 : 1000);
+        }
+      }, reduce ? 0 : delay);
+    }
+    function camOut(shot) {
+      shot.classList.remove("is-focused");
+      shot._pan = null;
+      place(shot);
     }
 
     function setZoom(on) {
@@ -292,7 +328,58 @@
       btn("zoom").setAttribute("aria-pressed", String(on));
       btn("zoom").setAttribute("title", on ? "Fit the whole screen" : "Zoom in on the action");
       focus();
+      if (on) { if (seen) camIn(slides[cur].firstChild, 0); }
+      else { clearTimeout(camTimer); slides.forEach(function (sl) { camOut(sl.firstChild); }); }
     }
+
+    // The camera's first move waits until the viewer is actually on screen.
+    if ("IntersectionObserver" in window) {
+      var cio = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return;
+        seen = true;
+        camIn(slides[cur].firstChild, 700);
+        cio.disconnect();
+      }, { threshold: 0.55 });
+      cio.observe(screen);
+    } else { seen = true; }
+
+    // Drag to look around while close up. A drag never counts as a click.
+    var drag = null, dragged = false;
+    screen.addEventListener("pointerdown", function (e) {
+      var shot = slides[cur].firstChild;
+      if (!zoomed() || !shot.classList.contains("is-focused") || !shot._cam || e.button > 0) return;
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, shot: shot, p: shot._pan || { x: 0, y: 0 }, on: false };
+    });
+    screen.addEventListener("pointermove", function (e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.on) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        drag.on = true;
+        proto.classList.add("is-panning");
+        tip.classList.remove("is-on");
+        try { screen.setPointerCapture(e.pointerId); } catch (err) { /* not supported */ }
+      }
+      var c = drag.shot._cam;
+      drag.shot._pan = { x: clamp(c.x + drag.p.x + dx, c.minX, 0) - c.x, y: clamp(c.y + drag.p.y + dy, c.minY, 0) - c.y };
+      place(drag.shot);
+    });
+    function endDrag(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (drag.on) {
+        dragged = true;
+        proto.classList.remove("is-panning");
+        setTimeout(function () { dragged = false; }, 0);
+      }
+      drag = null;
+    }
+    screen.addEventListener("pointerup", endDrag);
+    screen.addEventListener("pointercancel", endDrag);
+    screen.addEventListener("click", function (e) {
+      if (dragged) { e.stopPropagation(); e.preventDefault(); dragged = false; }
+    }, true);
+
+    /* ---- Behaviour ---- */
 
     function flash() {
       proto.classList.remove("is-flash");
@@ -371,6 +458,10 @@
         }
         from.setAttribute("aria-hidden", "true");
         to.setAttribute("aria-hidden", "false");
+        camOut(to.firstChild);
+        camIn(to.firstChild, reduce ? 0 : PUSH_MS + 250);
+        var leaving = from.firstChild;
+        setTimeout(function () { if (slides[cur].firstChild !== leaving) camOut(leaving); }, reduce ? 0 : PUSH_MS);
         if (opts.focusHot) {
           var h = to.querySelector(".proto-hot");
           if (h) h.focus({ preventScroll: true });
@@ -444,6 +535,7 @@
     screen.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
     screen.addEventListener("touchend", function (e) {
       if (sx === null) return;
+      if (zoomed() && slides[cur].firstChild.classList.contains("is-focused")) { sx = null; return; }
       var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
       sx = null;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) { if (dx < 0) advance(); else go(cur - 1); }
