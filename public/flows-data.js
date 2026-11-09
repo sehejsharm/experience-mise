@@ -2,7 +2,8 @@
  * Prototype flows, one per portal. Edit here only — no code changes needed.
  *
  * Each flow is its own prototype, shown in order on the page:
- * Author → Manager → Employee. Every screen is a real product screenshot.
+ * Author → Manager → Employee. Every screen is a real product screenshot;
+ * the Employee flow uses phone screenshots and shows in a phone frame.
  *
  * screen fields:
  *   src       path under /public/screens/
@@ -75,32 +76,28 @@ window.MISE_FLOWS = [
     id: "employee",
     portal: "Employee",
     title: "Do the work, step by step",
-    summary: "The room lands on the employee’s screen with its time slot. They start it, tick each step as it’s done, and send it back for a manager check.",
+    summary: "The room lands on the employee’s phone with its time slot. They start it, tick each step as it’s done, and send it to the manager for a check.",
     screens: [
-      { src: "screens/steps/employee-11-today.jpg", viewport: "desktop",
+      { src: "screens/steps/employee-m1-today.jpg", viewport: "mobile",
         title: "Check in for the shift",
         caption: "Check in. The next room is at the top, with its time target.",
-        hotspot: { x: 26.8, y: 58.1, w: 25.8, h: 6.6 }, action: "Open room" },
-      { src: "screens/steps/employee-12-room.jpg", viewport: "desktop",
+        hotspot: { x: 10.2, y: 54, w: 79.6, h: 7.3 }, action: "Open room" },
+      { src: "screens/steps/employee-m2-room.jpg", viewport: "mobile",
         title: "Open the room",
         caption: "The exact steps the author wrote, in the same order.",
-        hotspot: { x: 39.6, y: 18.3, w: 42.5, h: 6.4 }, action: "Start room task" },
-      { src: "screens/steps/employee-13-started.jpg", viewport: "desktop",
+        hotspot: { x: 4, y: 25.7, w: 91.9, h: 7.1 }, action: "Start room task" },
+      { src: "screens/steps/employee-m3-started.jpg", viewport: "mobile",
         title: "Work the steps",
         caption: "The clock is running. Tick each step as it’s done.",
-        hotspot: { x: 39.6, y: 33.8, w: 42.5, h: 32.4 }, action: "Tick each step" },
-      { src: "screens/steps/employee-14-all-checked.jpg", viewport: "desktop",
+        hotspot: { x: 4.1, y: 63.7, w: 91.9, h: 17.8 }, action: "Tick each step" },
+      { src: "screens/steps/employee-m4-all-checked.jpg", viewport: "mobile",
         title: "All steps done",
-        caption: "Three of three done. Saved, not sent yet.",
-        hotspot: { x: 39.6, y: 61.3, w: 42.5, h: 6.5 }, action: "Save the final room check" },
-      { src: "screens/steps/employee-15-send.jpg", viewport: "desktop",
-        title: "Send for a manager check",
-        caption: "Every step confirmed. Now a second pair of eyes.",
-        hotspot: { x: 39.6, y: 61.6, w: 42.5, h: 6.5 }, action: "Send room for manager check" },
-      { src: "screens/steps/employee-16-submitted.jpg", viewport: "desktop",
+        caption: "Every step ticked. Save the final check and it goes to the manager.",
+        hotspot: { x: 4, y: 56.3, w: 91.9, h: 7 }, action: "Save the final room check" },
+      { src: "screens/steps/employee-m5-submitted.jpg", viewport: "mobile",
         title: "With the manager",
         caption: "Submitted for an independent check. The work is on record.",
-        hotspot: { x: 39.6, y: 22.4, w: 42.5, h: 6.2 }, action: "Waiting for manager check" }
+        hotspot: { x: 4.1, y: 12.8, w: 91.8, h: 19.4 }, action: "the confirmation" }
     ]
   }
 ];

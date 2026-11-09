@@ -60,6 +60,7 @@
 .proto-btn:hover { background: rgba(255, 255, 255, .07); color: var(--ink); }
 .proto-btn:focus-visible { outline: 2px solid var(--mint); outline-offset: 1px; }
 .proto-btn:disabled { opacity: .3; cursor: default; background: none; }
+.proto-btn[hidden] { display: none; }
 .proto-btn[aria-pressed="true"] { color: #6CC4FF; background: rgba(13, 153, 255, .14); }
 
 /* Canvas: neutral dotted board the device sits on */
@@ -147,6 +148,10 @@ html.proto-open, html.proto-open body { overflow: hidden; }
   .proto-bar { height: 48px; }
   .proto-chrome { height: 24px; }
   .proto.is-presenting { width: auto; }
+  /* Phone flows: a wider viewer for the toolbar, and a phone sized to the window height
+     (286px = the 256px above, plus the phone's bezel and status bar) */
+  .proto.is-mobile { width: min(calc(100vw - 400px), 680px); }
+  .proto.is-mobile:not(.is-presenting) .proto-device.phone { width: min(420px, max(200px, calc((100vh - 286px) * var(--ar, .53) + 22px))); }
   .proto-canvas { padding: 16px; }
   .proto-device.browser { max-width: none; }
   .proto-cap { height: 64px; min-height: 0; padding-block: 0; }

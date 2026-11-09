@@ -551,7 +551,9 @@
     }
 
     render();
-    setZoom(narrow.matches);
+    // Phone screenshots are already readable at phone size, so only desktop screens zoom.
+    if (mobile) btn("zoom").hidden = true;
+    setZoom(narrow.matches && !mobile);
     var api = { present: present, reveal: reveal };
     return api;
   }
